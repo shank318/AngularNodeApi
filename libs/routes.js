@@ -88,6 +88,14 @@ request.post({ url:'http://api.justyo.co/yoall/',
 
 });
 
+app.get('/parse', function(req,res)
+{
+   
+    res.render('./public/index');
+
+
+});
+
 
 
 

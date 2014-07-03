@@ -1,0 +1,6 @@
+{
+ "username" : "shank",
+ "password" :"123",
+ "country" : "India",
+ "city"    : "agra"
+}

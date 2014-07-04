@@ -1,28 +1,55 @@
-<!doctype html>
-<html ng-app="Parse">
+<!DOCTYPE html>
+<html data-ng-app="parseApp">
   <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.14/angular.min.js"></script>
-    <script src="http://backbonejs.org/backbone-min.js"></script>
-    <script src="javascripts/parsemodel.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.14/angular.min.js"></script>  
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   </head>
-  <body>
+  <body >
 
- <div ng-controller="ParseData">
-    <table >
-    <thead>
+ <div class= "container" data-ng-controller="ParseController" >
+  <table class="table" >
+  <thead>
   <tr>
   <th>Email</th>
   <th>Phone</th>
+  <th>Age</th>
  </tr>
-    </thead>
-   
-    <tr ng-repeat="temp in table">
+</thead>
+ <tbody> 
+<tr data-ng-repeat="temp in user.results">
                 <td>{{temp.email}}</td>
                 <td>{{temp.phone}}</td>
-               
-     </tr>
+                <td>{{temp.age}}</td>
+   </tr>
+
+ </tbody>           
 </table>
 
 </div>
+
+
+<script type="text/javascript"> 
+
+
+    var parse = angular.module('parseApp',[]);
+
+   function ParseController($scope, $http)
+   {
+    $http({method : 'GET',url :'https://api.parse.com/1/classes/User',
+
+  headers: {'X-Parse-Application-Id': '6OJ2Wl0qTyUHRjg8xBhO9laf5zzg5vONwpm5LCBO',
+             'X-Parse-REST-API-Key':'Rqswa37oivdEkqkB5kGVkwWuES2idF193Cye6vq4',
+              }}).success(function(data,status) {
+
+              //  alert(data.results[0].email);
+
+$scope.user = data;
+});
+
+
+}
+parse.controller('ParseController',ParseController);
+
+</script>
   </body>
 </html>

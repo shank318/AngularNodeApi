@@ -37,6 +37,9 @@ UM.addNewUser( {userName : req.param('username'),
                 }
                 , function(e,o)
                  {
+                   
+
+
 
                 if (e){
 				res.send(e);
@@ -45,6 +48,26 @@ UM.addNewUser( {userName : req.param('username'),
 			}
 
              } );
+
+});
+
+
+app.post('/upload', function(req,res)
+{
+   console.log(req.param('username'));
+   UM.uploadImage({userName : req.param('username'), 
+                   password : req.param('password') , 
+                   country :req.param('country'),
+                   city : req.param('city')}, req, function(e,o)
+   {
+            
+            if (e){
+        res.send(e);
+      } else{
+        res.send('uploaded', 200);
+      }
+
+   });
 
 });
 

@@ -1,6 +1,5 @@
 {
- "username" : "shank",
+ "username" : "radhe",
  "password" :"123",
- "country" : "India",
- "city"    : "agra"
+ "country" : "India" 
 }

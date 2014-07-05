@@ -16,6 +16,8 @@
     "mongoose" : "3.6.x",
     "request" : "*",
         "nconf"    : "0.6.x",
-        "winston"  : "0.7.x"
+        "winston"  : "0.7.x",
+        "formidable" : "*",
+        "node-fs":"*"
   }
 }

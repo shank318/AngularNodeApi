@@ -34,6 +34,7 @@ UM.addNewUser( {userName : req.param('username'),
 	            password : req.param('password') , 
 	            country :req.param('country'),
                 city : req.param('city'),
+                comments: req.param('comments'),
                 }
                 , function(e,o)
                  {
@@ -44,7 +45,7 @@ UM.addNewUser( {userName : req.param('username'),
                 if (e){
 				res.send(e);
 			}	else{
-				res.send('ok', 200);
+				res.send(o[0]._id);
 			}
 
              } );

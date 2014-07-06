@@ -1,5 +1,7 @@
 {
- "username" : "radhe",
+ "username" : "Neha",
  "password" :"123",
- "country" : "India" 
+ "country" : "India" ,
+ "city": "agra",
+ "comments" : "my first post"
 }

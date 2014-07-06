@@ -1,5 +1,6 @@
 var mongoose    = require('mongoose');
 var user = mongoose.model('UserInfo');
+var comments= mongoose.model('CommentModel')
 var formidable = require('formidable');
  var   fs      = require( "fs" );
 
@@ -46,14 +47,22 @@ exports.addNewUser = function(newUserData, callback)
 {
 
   
-  user.findOne({userName: newUserData.userName}, function(e,o)
+  user.findOne({userName: new RegExp("^" + newUserData.userName.toLowerCase(), "i") }, function(e,o)
   {
   	    console.log(newUserData);
     
-        if(o)
-        	callback('user already taken');
+        if(e)
+        { 
+        	callback('error');
+        }
+        else if(o)
+          callback('alreader taken');
         else 
+        {
+
+        comments.collection.insert({comments: newUserData.comments}, callback);  
     	  user.collection.insert(newUserData, {w:1}, callback);
+      }
 
   } );
 

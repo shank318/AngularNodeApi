@@ -2,23 +2,10 @@
 
    function ParseController($scope, $http)
    {
-    $http({method : 'GET',url :'https://api.parse.com/1/classes/User', params:{limit: '1000', order: '-createdAt'},
+    $http({method : 'GET',url :'http://localhost:1337/parse'}).success(function(data,status) {
+    
+    $scope.user = filter(data);
 
-  headers: {'X-Parse-Application-Id': '6OJ2Wl0qTyUHRjg8xBhO9laf5zzg5vONwpm5LCBO',
-             'X-Parse-REST-API-Key':'Rqswa37oivdEkqkB5kGVkwWuES2idF193Cye6vq4',
-
-              }}).success(function(data,status) {
-
-  // alert(data.results.length);
-            
-
-//$scope.user = data;
-$scope.user = filter(data);
-
-$scope.Phonefilter= function(temp){
-     
-	return temp.phone.length>0;
-}
 });
 
 

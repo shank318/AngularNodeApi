@@ -1,4 +1,5 @@
 var UM   = require('./Models/UserAccounts');
+
 var request = require('request');
 module.exports = function(app)
 {
@@ -95,8 +96,8 @@ app.get('/yo', function(req,res)
 
 
 // do the POST call
-request.post({ url:'http://api.justyo.co/yoall/',
-     params:{ api_token:'618cf60f-7fe1-1fdc-3a04-2066a0d37dfb'} },
+request.post({ url:'http://api.justyo.co/yoall',
+     headers:{ api_token:'618cf60f-7fe1-1fdc-3a04-2066a0d37dfb'} },
     function (error, response, body) {
 
         if (!error && response.statusCode ==200) {
@@ -115,7 +116,27 @@ request.post({ url:'http://api.justyo.co/yoall/',
 app.get('/parse', function(req,res)
 {
    
-    res.render('./public/index');
+   var options = {
+
+      url: 'https://api.parse.com/1/classes/User?limit=1000&order=-createdAt',
+      headers: {
+      'X-Parse-Application-Id': '6OJ2Wl0qTyUHRjg8xBhO9laf5zzg5vONwpm5LCBO',
+      'X-Parse-REST-API-Key':'Rqswa37oivdEkqkB5kGVkwWuES2idF193Cye6vq4',
+               },
+     //  params:{limit: '1000', order: '-createdAt'}   
+};
+
+   request.get(options, function(error,response,body)
+   {
+          if (!error && response.statusCode ==200) {
+            console.log(body);
+            res.send(body);
+
+        } else {
+            res.send('Oops not working'+response.statusCode)
+        }
+
+   })
 
 
 });

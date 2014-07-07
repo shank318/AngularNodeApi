@@ -11,9 +11,16 @@ var Comments = new Schema({
 
 });
 
+
+var email = new Schema({
+
+    email : {type: String, unique:true}
+
+});
+
 var UserInfo = new Schema({
 
-  userName : {type : String, required: true},
+  userName : {type : String, required: true, index:{unique:true}},
   password : {type : String, required: true},
   country  : {type : String, required: true},
   city : {type : String , required: true},
@@ -24,8 +31,10 @@ var UserInfo = new Schema({
 
 var UserModel = mongoose.model('UserInfo', UserInfo);
 var CommentModel = mongoose.model('CommentModel', Comments);
+var EmailModel= mongoose.model('EmailModel', email);
 
 module.exports.UserModel= UserModel;
 module.exports.CommentModel= CommentModel;
+module.exports.EmailModel=EmailModel;
 
 };

@@ -3,5 +3,5 @@
  "password" :"123",
  "country" : "India" ,
  "city": "agra",
- "comments" : "my first post"
+ "shared" : ["a","b","c"]
 }

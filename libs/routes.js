@@ -56,17 +56,16 @@ UM.addNewUser( {userName : req.param('username'),
 
 app.post('/upload', function(req,res)
 {
-   console.log(req.param('username'));
+   console.log(req.param('shared').length);
    UM.uploadImage({userName : req.param('username'), 
-                   password : req.param('password') , 
-                   country :req.param('country'),
-                   city : req.param('city')}, req, function(e,o)
+                   shared : req.param('shared') , 
+                   }, req, function(e,o)
    {
             
             if (e){
         res.send(e);
       } else{
-        res.send('uploaded', 200);
+        res.send({'success': o});
       }
 
    });

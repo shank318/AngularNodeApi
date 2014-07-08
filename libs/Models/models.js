@@ -29,12 +29,25 @@ var UserInfo = new Schema({
 
 });
 
+
+var Photo = new Schema({
+   
+   user: {type: String},
+   link: {type: String},
+   shared : {type: Array}
+
+});
+
 var UserModel = mongoose.model('UserInfo', UserInfo);
 var CommentModel = mongoose.model('CommentModel', Comments);
 var EmailModel= mongoose.model('EmailModel', email);
+var PhotoModel = mongoose.model('PhotoModel', Photo);
 
 module.exports.UserModel= UserModel;
 module.exports.CommentModel= CommentModel;
 module.exports.EmailModel=EmailModel;
+module.exports.PhotoModel= PhotoModel;
+
+
 
 };

@@ -1,5 +1,6 @@
 var mongoose    = require('mongoose');
 var user = mongoose.model('UserInfo');
+var statusUpdate = mongoose.model('StatusUpdate')
 var comments= mongoose.model('CommentModel');
 var uploadphoto=mongoose.model('PhotoModel');
 var formidable = require('formidable');
@@ -7,11 +8,42 @@ var formidable = require('formidable');
 
 
 
+
+
+
+
+exports.status= function(data, callback)
+{
+
+ user.findOne({userName: data.user},function(e,o){
+
+      if(e)
+        callback('not found');
+      else
+      {
+        console.log(o);
+        console.log(data);
+
+
+        statusUpdate.collection.insert({status: data.status}, function(e,o)
+        {
+                   
+                  if(e)
+                    callback(e)
+                  else
+                    callback(o)
+        });
+      }
+
+ });
+
+
+};
 exports.getAllRecords = function(callback)
 {
 
 
-  uploadphoto.find({shared: 'j'}).exec(function(e, res) {
+ comments.find().exec(function(e, res) {
 		if (e) callback(e)
 		else callback(res)
 	});
@@ -95,13 +127,12 @@ exports.addNewUser = function(newUserData, callback)
         { 
         	callback('error');
         }
-        else if(o)
-          callback('alreader taken');
+       
         else 
         {
-
+        
         comments.collection.insert({comments: newUserData.comments}, callback);  
-    	  user.collection.insert(newUserData, {w:1}, callback);
+    	//  user.collection.insert(newUserData, {w:1}, callback);
       }
 
   } );

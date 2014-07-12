@@ -54,6 +54,21 @@ UM.addNewUser( {userName : req.param('username'),
 });
 
 
+app.post('/status', function(req,res){
+
+  UM.status({user: req.param('username'), status : req.param('status')}, function(e,o){
+              
+           if (e){
+        res.send(e);
+      } else{
+        res.send(o);
+      }    
+  
+  });
+      
+
+});
+
 app.post('/upload', function(req,res)
 {
    console.log(req.param('shared').length);

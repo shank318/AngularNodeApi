@@ -21,11 +21,11 @@ exports.status= function(data, callback)
         callback('not found');
       else
       {
-        console.log(o);
+        console.log(o._id);
         console.log(data);
 
 
-        statusUpdate.collection.insert({status: data.status}, function(e,o)
+        statusUpdate.collection.insert({status: data.status, info: o._id}, function(e,o)
         {
                    
                   if(e)
@@ -39,11 +39,33 @@ exports.status= function(data, callback)
 
 
 };
+
+exports.getStatus = function(id,callback)
+{
+     
+   statusUpdate.findById(id, function(e,o){
+
+        console.log(o);
+       statusUpdate.populate(o, {path : 'info'}, function(e,o){
+           
+           callback(o);
+           
+       });
+
+
+   });
+
+
+};
+
+
+
+
 exports.getAllRecords = function(callback)
 {
 
 
- comments.find().exec(function(e, res) {
+ statusUpdate.find().exec(function(e, res) {
 		if (e) callback(e)
 		else callback(res)
 	});
@@ -127,12 +149,13 @@ exports.addNewUser = function(newUserData, callback)
         { 
         	callback('error');
         }
-       
+        else if(o)
+          callback('alreader taken');
         else 
         {
-        
+
         comments.collection.insert({comments: newUserData.comments}, callback);  
-    	//  user.collection.insert(newUserData, {w:1}, callback);
+    	  user.collection.insert(newUserData, {w:1}, callback);
       }
 
   } );
@@ -153,5 +176,45 @@ exports.getUser = function(query,callback)
       	callback(e);
 
   });
+
+};
+
+
+
+exports.updateStatus = function(data,callback)
+{
+   user.findOne({userName: data.username},function(e,o){
+
+      if(e)
+        callback('not found');
+      else
+      {
+        console.log(o._id);
+        console.log(data.id);
+
+       statusUpdate.collection.update({ _id: data.id}, {$push: { likers: o._id}}, function(e,o){
+            
+                console.log(o);
+
+         statusUpdate.findById(data.id, function(e,o){
+
+        console.log(o);
+       statusUpdate.populate(o, {path : 'likers'}, function(e,o){
+           
+           callback(o);
+           
+       });
+
+
+   });
+
+
+            
+
+    } );
+
+  }
+
+});
 
 };

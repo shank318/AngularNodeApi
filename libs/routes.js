@@ -87,12 +87,46 @@ app.post('/upload', function(req,res)
 
 });
 
+app.post('/like', function(req,res)
+{
+  
+   UM.updateStatus({username : req.param('username'), 
+                   id : req.param('id') , 
+                   }, function(e,o)
+   {
+            
+            if (e){
+        res.send(e);
+      } else{
+        res.send(o);
+      }
+
+   });
+
+});
+
 
 app.get('/login', function(req,res)
 {
 
 
 UM.getUser(req.param('usr'),function(o)
+{
+    if(o)
+        res.send(o)
+    else
+        res.send('error');
+   
+});
+
+});
+
+
+app.get('/status/:id', function(req,res)
+{
+
+console.log(req.param('id'));
+UM.getStatus(req.param('id'),function(o)
 {
     if(o)
         res.send(o)

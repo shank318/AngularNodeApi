@@ -1,7 +1,4 @@
 {
- "username" : "AGARWAL34",
- "password" :"123",
- "country" : "India" ,
- "comments": "agra",
- "shared" : ["a","b","c"]
+ "username" : "shank",
+ "id" : "53c1474af10f397422000002"
 }

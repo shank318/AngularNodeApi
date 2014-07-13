@@ -187,7 +187,13 @@ exports.getUser = function(query,callback)
 
 };
 
+// 360009982033
 
+//9717757347
+//324028828151
+//answer- shank
+//name-ravi9876
+//12345678
 
 exports.updateStatus = function(data,callback)
 {
@@ -199,19 +205,22 @@ exports.updateStatus = function(data,callback)
       {
         console.log(o._id);
         console.log(data.id);
+        var id= o._id;
+        statusUpdate.update({_id: data.id}, {$push : {likers : id}}, function(e,o){
+           
+           console.log(o);
 
-       statusUpdate.collection.update({ _id: data.id}, {$push: { likers :o._id}}, function(e,o){
-            
-                console.log(o);
-                 if(e)
-                callback(e)
-              else
-                callback(o)
+           if(e)
+            callback(e)
+          else
+            callback(o)
+               
 
-    } );
+        });
 
-  }
+}
 
+    
 });
 
 };

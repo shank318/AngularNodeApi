@@ -44,7 +44,7 @@ var StatusUpdate= new Schema({
    
    status : {type: String},
    info : {type : Schema.ObjectId , ref: 'UserInfo'},
-   likers : {type: Array , ref : 'UserInfo', def :[]} ,
+   likers : [{type: Schema.ObjectId , ref : 'UserInfo'}] ,
 
 
 

@@ -195,6 +195,8 @@ exports.getUser = function(query,callback)
 //name-ravi9876
 //12345678
 
+//mongo ds053469.mongolab.com:53469/shank -u <dbuser> -p <dbpassword>
+
 exports.updateStatus = function(data,callback)
 {
    user.findOne({userName: data.username},function(e,o){

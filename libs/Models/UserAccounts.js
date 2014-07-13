@@ -48,9 +48,17 @@ exports.getStatus = function(id,callback)
         console.log(o);
        statusUpdate.populate(o, {path : 'info'}, function(e,o){
            
+            statusUpdate.populate(o, {path : 'likers'}, function(e,o){
+           
+           console.log(o);
            callback(o);
            
        });
+           
+       });
+
+
+
 
 
    });
@@ -192,24 +200,13 @@ exports.updateStatus = function(data,callback)
         console.log(o._id);
         console.log(data.id);
 
-       statusUpdate.collection.update({ _id: data.id}, {$push: { likers: o._id}}, function(e,o){
+       statusUpdate.collection.update({ _id: data.id}, {$push: { likers :o._id}}, function(e,o){
             
                 console.log(o);
-
-         statusUpdate.findById(data.id, function(e,o){
-
-        console.log(o);
-       statusUpdate.populate(o, {path : 'likers'}, function(e,o){
-           
-           callback(o);
-           
-       });
-
-
-   });
-
-
-            
+                 if(e)
+                callback(e)
+              else
+                callback(o)
 
     } );
 

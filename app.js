@@ -4,7 +4,7 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var UserModel    = require('./libs/mongoose').UserModel;
+ require('./libs/mongoose');
 var log  = require('./libs/log')(module);
 var config = require('./libs/config');
 

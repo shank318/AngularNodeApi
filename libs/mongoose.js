@@ -5,6 +5,7 @@ var log = require('./log')(module);
 
 
 mongoose.connect(config.get('mongoose:uri'));
+console.log(config.get('mongoose:uri'));
 
 var db= mongoose.connection;
 

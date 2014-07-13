@@ -2,7 +2,7 @@
 
    function ParseController($scope, $http)
    {
-    $http({method : 'GET',url :'http://mongoexp.herokuapp.com/parse'}).success(function(data,status) {
+    $http({method : 'GET',url :'http://localhost:1337/parse'}).success(function(data,status) {
     
     $scope.user = filter(data);
 

@@ -45,13 +45,20 @@ exports.getStatus = function(id,callback)
      
    statusUpdate.findById(id, function(e,o){
 
-        console.log(o);
+        
        statusUpdate.populate(o, {path : 'info'}, function(e,o){
            
             statusUpdate.populate(o, {path : 'likers'}, function(e,o){
+      
+          console.log(o.comments);
+           statusUpdate.populate(o, {path : 'comments.user'}, function(e,o){
+      
+      if(e)
+        callback(e)
+      else
+         callback(o);
            
-           console.log(o);
-           callback(o);
+       });
            
        });
            
@@ -199,6 +206,7 @@ exports.getUser = function(query,callback)
 
 exports.updateStatus = function(data,callback)
 {
+
    user.findOne({userName: data.username},function(e,o){
 
       if(e)
@@ -209,6 +217,45 @@ exports.updateStatus = function(data,callback)
         console.log(data.id);
         var id= o._id;
         statusUpdate.update({_id: data.id}, {$push : {likers : id}}, function(e,o){
+           
+           console.log(o);
+
+           if(e)
+            callback(e)
+          else
+            callback(o)
+               
+
+        });
+
+}
+
+    
+});
+
+};
+
+
+
+
+
+exports.addComment = function(data,callback)
+{
+  console.log(data.user)
+   user.findOne({userName: data.user},function(e,o){
+
+      if(e)
+        callback('not found');
+      else
+      {
+        console.log(o._id);
+        console.log(data.comment);
+        var id= o._id;
+        statusUpdate.update({_id: data.id}, 
+       {$push : {comments : {
+          comment : data.comment,
+          user    : o._id
+        }}} , function(e,o){
            
            console.log(o);
 

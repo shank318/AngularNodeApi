@@ -70,6 +70,23 @@ app.post('/status', function(req,res){
 
 });
 
+
+app.post('/comment', function(req,res){
+
+  
+  UM.addComment({user: req.param('username'), id : req.param('id'), comment : req.param('comment')}, function(e,o){
+              
+           if (e){
+        res.send(e);
+      } else{
+        res.send(o);
+      }    
+  
+  });
+      
+
+});
+
 app.post('/upload', function(req,res)
 {
    console.log(req.param('shared').length);

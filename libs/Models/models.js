@@ -45,6 +45,10 @@ var StatusUpdate= new Schema({
    status : {type: String},
    info : {type : Schema.ObjectId , ref: 'UserInfo'},
    likers : [{type: Schema.ObjectId , ref : 'UserInfo'}] ,
+   comments : [{ comment : String,
+                  user : {type: Schema.ObjectId, ref :'UserInfo'},
+                  created_at :  {type: Date, required: true, default: Date.now}
+              }]
 
 
 

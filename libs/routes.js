@@ -28,6 +28,27 @@ app.get('/all', function(req, res)
 });
 
 
+
+app.post('/time', function(req,res){
+
+
+UM.insertTime({user: req.param('username')}, function(e,o){
+
+          
+                if (e){
+        res.send(e);
+      } else{
+        res.send(o[0]._id);
+      }
+
+
+});
+
+
+
+});
+
+
 app.post('/new', function(req,res)
 {
 

@@ -39,6 +39,13 @@ var UserInfo = new Schema({
 
 });
 
+var TimeStamp = new Schema({
+
+user : {type: String},
+timestamp : {type: Date, required: true, default: Date.now}
+
+});
+
 
 var StatusUpdate= new Schema({
    
@@ -54,6 +61,11 @@ var StatusUpdate= new Schema({
 
 });
 
+
+
+
+
+
 var Photo = new Schema({
    
    user: {type: String},
@@ -68,12 +80,14 @@ var CommentModel = mongoose.model('CommentModel', Comments);
 var EmailModel= mongoose.model('EmailModel', email);
 var PhotoModel = mongoose.model('PhotoModel', Photo);
 var StatusUpdate= mongoose.model('StatusUpdate', StatusUpdate)
+var TimeStamp = mongoose.model('TimeStamp', TimeStamp);
 
 module.exports.UserModel= UserModel;
 module.exports.CommentModel= CommentModel;
 module.exports.EmailModel=EmailModel;
 module.exports.PhotoModel= PhotoModel;
 module.exports.StatusUpdate=StatusUpdate;
+module.exports.TimeStamp= TimeStamp;
 
 
 

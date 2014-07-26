@@ -2,6 +2,7 @@ var mongoose    = require('mongoose');
 var user = mongoose.model('UserInfo');
 var statusUpdate = mongoose.model('StatusUpdate')
 var comments= mongoose.model('CommentModel');
+var timestamp =mongoose.model('TimeStamp');
 var uploadphoto=mongoose.model('PhotoModel');
 var formidable = require('formidable');
  var   fs      = require( "fs" );
@@ -39,6 +40,41 @@ exports.status= function(data, callback)
 
 
 };
+
+
+
+
+exports.insertTime = function(data, callback)
+{
+
+
+ timestamp.findOne(data,function(e,o){
+
+
+       if(e)
+        { 
+          callback('error');
+        }
+        else if(o)
+          callback('alreader taken');
+        else 
+        {
+
+       timestamp.collection.insert(data, function(e,o)
+        {
+                   
+                  if(e)
+                    callback(e)
+                  else
+                    callback(o)
+        });
+      }
+
+ });
+
+
+
+}
 
 exports.getStatus = function(id,callback)
 {
@@ -80,7 +116,7 @@ exports.getAllRecords = function(callback)
 {
 
 
- statusUpdate.find().exec(function(e, res) {
+ timestamp.find().exec(function(e, res) {
 		if (e) callback(e)
 		else callback(res)
 	});

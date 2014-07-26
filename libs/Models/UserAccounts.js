@@ -41,7 +41,27 @@ exports.status= function(data, callback)
 
 };
 
+exports.getTime = function(data, callback)
+{
+console.log(data)
+console.log(new Date(data.start))
+console.log(new Date(data.start))
+ timestamp.find({timestamp : {"$gte" : new Date(data.start) , "$lte": new Date(data.end)}},function(e,o){
 
+
+       if(e)
+        { 
+          callback(e);
+        }
+        else if(o)
+          callback(o);
+       
+
+ });
+
+
+
+}
 
 
 exports.insertTime = function(data, callback)
@@ -60,6 +80,7 @@ exports.insertTime = function(data, callback)
         else 
         {
 
+        data.timestamp= new Date();
        timestamp.collection.insert(data, function(e,o)
         {
                    

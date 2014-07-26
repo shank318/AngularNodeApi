@@ -41,8 +41,8 @@ var UserInfo = new Schema({
 
 var TimeStamp = new Schema({
 
-user : {type: String},
-timestamp : {type: Date, required: true, default: Date.now}
+user : {type: String, required :true},
+timestamp : {type: Date, required: true}
 
 });
 

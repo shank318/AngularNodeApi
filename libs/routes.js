@@ -48,6 +48,24 @@ UM.insertTime({user: req.param('username')}, function(e,o){
 
 });
 
+app.get('/gettime', function(req,res){
+
+
+UM.getTime({start: req.param('start'), end : req.param('end')}, function(e,o){
+
+          
+                if (e){
+        res.send(e);
+      } else{
+        res.send(o);
+      }
+
+
+});
+
+
+
+});
 
 app.post('/new', function(req,res)
 {

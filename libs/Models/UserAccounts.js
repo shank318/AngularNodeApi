@@ -43,21 +43,55 @@ exports.status= function(data, callback)
 
 exports.getTime = function(data, callback)
 {
-console.log(data)
-console.log(new Date(data.start))
-console.log(new Date(data.start))
- timestamp.find({timestamp : {"$gte" : new Date(data.start) , "$lte": new Date(data.end)}},function(e,o){
+
+timestamp.collection.aggregate(
+   { 
+  $match : {timestamp : {"$gte" : new Date(data.start) , "$lte": new Date(data.end)}}
+    },
+    {
+      $project : {user:1,
+                  timestamp:1,
+                  year : {$year : "$timestamp"}, 
+                  month : {$month : "$timestamp"},
+                  day   : {$dayOfMonth : "$timestamp"}
+                }
+    },
+    { 
+  $group : {   
+               _id : {year : "$year", month : "$month", day : "$day"},         
+               users : {$addToSet : "$user"},
+               total : { $sum : 1 } 
+            }
+      },      
+     {       
+   $sort  : { date: -1 }  
+      }       
+
+    ,function(e,o){
+
+           if(e)
+         { 
+           callback(e);
+         }
+         else if(o)
+           callback(o);
 
 
-       if(e)
-        { 
-          callback(e);
-        }
-        else if(o)
-          callback(o);
+    }
+);
+
+ // timestamp.find({timestamp : {"$gte" : new Date(data.start) , "$lte": new Date(data.end)}},function(e,o){
+
+
+ //       if(e)
+ //        { 
+ //          callback(e);
+ //        }
+ //        else if(o)
+ //          callback(o);
        
 
- });
+ // });
 
 
 

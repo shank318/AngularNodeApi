@@ -62,10 +62,10 @@ timestamp.collection.aggregate(
                users : {$addToSet : "$user"},
                total : { $sum : 1 } 
             }
-      },      
-     {       
-   $sort  : { date: -1 }  
-      }       
+       }     
+   //   {       
+   // $sort  : { date: -1 }  
+   //    }       
 
     ,function(e,o){
 
